@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Carrito de Compras</h1>
+        <div id="cart-items" class="row"></div>
+        <!-- Botón de regresar a la tienda -->
+        <button onclick="window.location.href='shop.html'" class="btn btn-success mt-3">Regresar</button>
+        <!-- Botón de limpiar el carrito -->
+        <button onclick="clearCart()" class="btn btn-danger mt-3">Vaciar Carrito</button>
+        <!-- Botón de pagar que redirige a la página de pago -->
+        <button onclick="window.location.href='pago.html'" class="btn btn-warning mt-3">Pagar</button>
+    </div>
+
+    <script>
+        function displayCartItems() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let container = document.getElementById('cart-items');
+            let fragment = document.createDocumentFragment();
+
+            cart.forEach(item => {
+                let colDiv = document.createElement('div');
+                colDiv.className = 'col-md-4';
+                colDiv.innerHTML = `
+                    <div class="card">
+                        <img src="${item.img}" class="card-img-top" alt="${item.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${item.name}</h5>
+                            <p class="card-text">Precio: ${item.price}</p>
+                        </div>
+                    </div>
+                `;
+                fragment.appendChild(colDiv);
+            });
+
+            container.innerHTML = '';
+            container.appendChild(fragment);
+        }
+
+        function clearCart() {
+            localStorage.removeItem('cart');
+            displayCartItems(); // Redibujar la página para mostrar que el carrito está vacío
+        }
+
+        document.addEventListener('DOMContentLoaded', displayCartItems);
+    </script>
+</body>
+</html>
+
+
+

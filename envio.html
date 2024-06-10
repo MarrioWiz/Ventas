@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .title {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .shopping-cart {
+            border: 1px solid #ddd;
+            width: 350px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .item {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        .item:last-child {
+            border-bottom: none;
+        }
+        .item h3 {
+            color: #4CAF50;
+        }
+        .item p {
+            color: #555;
+        }
+        .item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .add-to-cart, .go-back, .pay {
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .add-to-cart {
+            background-color: #4CAF50; /* Green */
+        }
+        .go-back {
+            background-color: #f44336; /* Red */
+        }
+        .pay {
+            background-color: #FFD700; /* Yellow */
+            color: black;
+        }
+        .add-to-cart:hover, .go-back:hover, .pay:hover {
+            opacity: 0.8;
+        }
+        .cart-icon {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #4CAF50;
+        }
+        .cart-icon .badge {
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            border-radius: 50%;
+            padding: 5px 10px;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge" id="local-cart-badge">0</span>
+    </div>
+    <h2 class="title">Carrito de compras</h2>
+    <div class="shopping-cart">
+        <div class="item">
+            <img src="iphone.webp" alt="Producto">
+            <h3>Cd4011be</h3>
+            <p>Compuerta Nand Cuadruple de 2 entrada</p>
+            <p>Precio 100pzas: <b><span style="text-decoration: line-through; color: red;">$750</span> $599</b></p>
+            <ul class="list-unstyled d-flex justify-content-center mb-1">
+                <li>
+                    <i class="text-warning fa fa-star"></i>
+                    <i class="text-warning fa fa-star"></i>
+                    <i class="text-warning fa fa-star"></i>
+                    <i class="text-warning fa fa-star"></i>
+                    <i class="text-muted fa fa-star"></i>
+                </li>
+            </ul>
+            <button class="add-to-cart">Piezas Agregar al carrito</button>
+            <button class="pay" onclick="location.href='pago.html'">Pagar</button>
+        </div>
+        <button class="go-back" onclick="location.href='shop.html'">Regresar</button>
+    </div>
+
+    <script>
+        let cartCount = 0;
+        const cartIconBadge = document.querySelector('#cart-badge');
+        const localCartBadge = document.querySelector('#local-cart-badge');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                cartCount++;
+                cartIconBadge.textContent = cartCount;
+                localCartBadge.textContent = cartCount;
+            });
+        });
+    </script>
+</body>
+</html>
